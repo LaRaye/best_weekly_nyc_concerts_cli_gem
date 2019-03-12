@@ -2,4 +2,6 @@
 
 require_relative '../lib/best_weekly_nyc_concerts'
 
-puts "test"
+BestWeeklyNycConcerts::CLI.new.call
+
+#puts "test"

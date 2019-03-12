@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "best_weekly_nyc_concerts_cli_gem/version"
+require "best_weekly_nyc_concerts/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "best_weekly_nyc_concerts_cli_gem"
-  spec.version       = BestWeeklyNycConcertsCliGem::VERSION
+  spec.version       = BestWeeklyNycConcerts::VERSION
   spec.authors       = ["LaRaye"]
   spec.email         = ["lnj2105@gmail.com"]
 

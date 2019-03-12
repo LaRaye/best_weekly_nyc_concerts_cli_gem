@@ -1,3 +1,3 @@
-module BestWeeklyNycConcertsCliGem
+module BestWeeklyNycConcerts
   VERSION = "0.1.0"
 end
