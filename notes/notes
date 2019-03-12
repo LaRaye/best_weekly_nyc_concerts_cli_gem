@@ -1,0 +1,13 @@
+Best Weekly NYC Concerts CLI
+
+- A command line interface for roundup of this week's best concerts in NYC
+- User types 'this week's best concerts'
+- Shows a list of concerts:
+  1. Title, Date
+- Asks 'Which concert would you like to learn more about?' (location, genre, blurb)
+- Or 'How would you like to search concerts? by location or genre? date?'
+_ 'Would you like to learn more?' #=> blurb
+
+CLI
+  -Scraper
+    -Concerts 

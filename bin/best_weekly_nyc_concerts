@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/best_weekly_nyc_concerts'
+
+puts "test"
