@@ -3,7 +3,6 @@ class BestWeeklyNycConcerts::CLI
   def call
     puts "Welcome to this week's roundup of the best concerts in NYC!"
     menu
-    #goodbye
   end
 
   def menu
@@ -36,7 +35,6 @@ class BestWeeklyNycConcerts::CLI
         puts "Sorry, that's not a valid entry. Choose a number from above or enter 'exit'."
       end
     end
-    #goodbye
   end
 
   def goodbye

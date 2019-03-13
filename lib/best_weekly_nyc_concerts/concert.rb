@@ -8,8 +8,12 @@ class BestWeeklyNycConcerts::Concert
     @location = location
     @genre = genre
     @blurb = blurb
-    @url = url 
+    @url = url
     @@all << self
+  end
+
+  def self.all
+    @@all
   end
 
   def list_concerts

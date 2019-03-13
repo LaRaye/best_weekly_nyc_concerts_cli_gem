@@ -10,4 +10,4 @@ _ 'Would you like to learn more?' #=> blurb
 
 CLI
   -Scraper
-    -Concerts 
+    -Concerts
