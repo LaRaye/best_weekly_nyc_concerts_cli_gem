@@ -16,19 +16,5 @@ class BestWeeklyNycConcerts::Concert
     @@all
   end
 
-  def list_concerts
-    puts "concert list"
-  end
 
-  def list_by_location
-    puts "location list"
-  end
-
-  def list_by_genre
-    puts "genre list"
-  end
-
-  def concert_info
-    puts "will provide all info for single concert"
-  end
 end
