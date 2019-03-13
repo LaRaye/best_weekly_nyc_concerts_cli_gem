@@ -3,7 +3,7 @@ class BestWeeklyNycConcerts::CLI
   def call
     puts "Welcome to this week's roundup of the best concerts in NYC!"
     menu
-    goodbye
+    #goodbye
   end
 
   def menu
@@ -30,9 +30,13 @@ class BestWeeklyNycConcerts::CLI
       when "3"
         list_by_genre
         more_info
+      when "exit"
+        goodbye
+      else
+        puts "Sorry, that's not a valid entry. Choose a number from above or enter 'exit'."
       end
     end
-    goodbye
+    #goodbye
   end
 
   def goodbye
@@ -40,7 +44,7 @@ class BestWeeklyNycConcerts::CLI
   end
 
   def more_info
-    puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit' to leave:"
+    puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
 
     input = nil
     while input != "exit"
@@ -56,19 +60,19 @@ class BestWeeklyNycConcerts::CLI
     goodbye
   end
 
-  def list_concerts
-    puts "concert list"
-  end
-
-  def list_by_location
-    puts "location list"
-  end
-
-  def list_by_genre
-    puts "genre list"
-  end
-
-  def concert_info
-    puts "will provide all info for single concert"
-  end
+  # def list_concerts
+  #   puts "concert list"
+  # end
+  #
+  # def list_by_location
+  #   puts "location list"
+  # end
+  #
+  # def list_by_genre
+  #   puts "genre list"
+  # end
+  #
+  # def concert_info
+  #   puts "will provide all info for single concert"
+  # end
 end
