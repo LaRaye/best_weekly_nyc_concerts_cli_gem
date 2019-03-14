@@ -1,7 +1,8 @@
 class BestWeeklyNycConcerts::CLI
 
   def call
-    puts "Welcome to this week's roundup of the best concerts in NYC!"
+    BestWeeklyNycConcerts::Concert_Scraper.new.create_concerts
+    puts "Welcome to the roundup of the best concerts in NYC this week!"
     menu
   end
 
@@ -44,22 +45,33 @@ class BestWeeklyNycConcerts::CLI
   def more_info
     puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
 
-    input = nil
-    while input != "exit"
-      input = gets.strip.downcase
-      case input
-      when "1"
-        concert_info
-        menu
-      when "menu"
-        menu
+    input = gets.strip.downcase
+
+    if input != "exit" || "menu"
+      input = input.to_i
+      BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+        if input == index - 1
+          puts "#{index - 1}. #{concert.title}, #{concert.date}"
+          puts "Playing At: #{concert.location}"
+          puts "Genre: #{concert.genre}"
+          puts "About: #{concert.blurb}"
+        end
       end
+    elsif input == "menu"
+      menu
+    elsif input == "exit"
+      goodbye
+    else
+      puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
     end
-    goodbye
   end
 
   def list_concerts
-    puts "concert list"
+    puts "The Best Concerts in NYC This Week:"
+
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      puts "#{index + 1}. #{concert.title}, #{concert.date}"
+    end
   end
 
   def list_by_location
