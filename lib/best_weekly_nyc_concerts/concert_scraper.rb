@@ -1,13 +1,16 @@
 class BestWeeklyNycConcerts::Concert_Scraper
 
   def get_page
-    doc = Nokogiri::HTML(open("https://www.timeout.com/newyork/music/the-best-concerts-in-nyc-this-week"))
-    binding.pry
+    @doc = Nokogiri::HTML(open("https://www.timeout.com/newyork/music/the-best-concerts-in-nyc-this-week"))
 
-    #title = doc.css(".card-content").first.css("h3").text.strip
-    #location = doc.css(".card-content").first.css("span.bold").text.strip
-    #genre = doc.css(".card-content").first.css(".category").text.strip
-    #date = doc.css(".card-content").first.css("time.bold").text.strip
-    #blurb = doc.css(".card-content").first.css(".js-card-desc-content").text.strip
+    @doc.css(".card-content").each do |concert_listing|
+     concert = BestWeeklyNycConcerts::Concert.new
+     concert.title = concert_listing.css("h3").text.strip
+     concert.location = concert_listing.css("span.bold").text.strip
+     concert.date = concert_listing.css("time.bold").text.strip
+     concert.genre = concert_listing.css(".category").text.strip
+     concert.blurb = concert_listing.css(".js-card-desc-content").text.strip
+    end
   end
+
 end
