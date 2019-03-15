@@ -27,8 +27,7 @@ class BestWeeklyNycConcerts::CLI
         list_concerts
         more_info
       when "2"
-        list_by_location
-        more_info
+        location_list
       when "3"
         list_by_genre
         more_info
@@ -105,8 +104,32 @@ class BestWeeklyNycConcerts::CLI
     end
   end
 
+  #not working
+  def location_list
+    puts ""
+    puts "Below are the locations for all of this week's concerts:"
+    puts ""
+    @location_arr = BestWeeklyNycConcerts::Concert.all.collect {|concert| concert.location}
+    @location_arr.uniq
+    @location_arr.each_with_index {|location, index| puts "#{index + 1}. #{location}"}
+  end
+
   def list_by_location
-    puts "location list"
+    puts ""
+    puts "Enter the number of the location to see the concert(s) playing there:"
+    input = gets.strip.to_i
+
+    location = @location_arr.each_with_index do |location, index|
+      if index == input - 1
+        location
+      end
+    end
+
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      if concert.location == location
+        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+      end
+    end
   end
 
   def list_by_genre
