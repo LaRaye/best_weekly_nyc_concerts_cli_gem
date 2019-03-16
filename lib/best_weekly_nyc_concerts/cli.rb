@@ -68,7 +68,6 @@ class BestWeeklyNycConcerts::CLI
       if input == "menu"
         menu
       elsif input.to_i > 0
-        input = input.to_i
         concert_info(input)
         select_another
       elsif input == "exit"
@@ -91,7 +90,6 @@ class BestWeeklyNycConcerts::CLI
       if input == "menu"
         menu
       elsif input.to_i > 0
-        input = input.to_i
         concert_info(input)
         menu
       elsif input == "exit"
@@ -105,7 +103,7 @@ class BestWeeklyNycConcerts::CLI
   end
 
   def concert_info(input)
-    input = input
+    input = input.to_i
     BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
       if input - 1 == index
         puts ""
@@ -176,10 +174,12 @@ class BestWeeklyNycConcerts::CLI
   def list_by_genre
     puts ""
     puts "Enter the number of the genre to see the concert(s) available:"
-    input = gets.strip.to_i
+
+    input = gets.strip
     genre = ""
+
     @genre_list.each_with_index do |gen, index|
-      if input - 1 == index
+      if input.to_i - 1 == index
         genre = gen
       end
     end
@@ -190,4 +190,5 @@ class BestWeeklyNycConcerts::CLI
       end
     end
   end
+
 end

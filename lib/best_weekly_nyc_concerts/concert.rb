@@ -14,5 +14,4 @@ class BestWeeklyNycConcerts::Concert
   def self.all
     @@all
   end
-  
 end
