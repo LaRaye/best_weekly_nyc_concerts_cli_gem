@@ -5,7 +5,7 @@ class BestWeeklyNycConcerts::CLI
     puts ""
     puts "Welcome to the roundup of the best concerts in NYC this week!"
     menu
-    goodbye
+    #goodbye
   end
 
   def menu
@@ -27,19 +27,22 @@ class BestWeeklyNycConcerts::CLI
       when "1"
         list_concerts
         more_info
+        goodbye
       when "2"
         location_list
         list_by_location
+        more_info
       when "3"
+        genre_list
         list_by_genre
         more_info
       when "exit"
-        goodbye
+        break
       else
         puts "Sorry, that's not a valid entry. Choose a number from above or enter 'exit'."
       end
     end
-    puts ""
+    goodbye
   end
 
   def goodbye
@@ -47,31 +50,34 @@ class BestWeeklyNycConcerts::CLI
     puts "Thanks for checking out this week's roundup of the best NYC concerts!"
   end
 
+  def list_concerts
+    puts ""
+    puts "The Best Concerts in NYC This Week:"
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      puts "#{index + 1}. #{concert.title}, #{concert.date}"
+    end
+  end
+
   #work on this loop
   def more_info
     puts ""
     puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
 
-    input = gets.strip.downcase
+    input = nil
 
     while input != "exit"
+      input = gets.strip.downcase
       if input == "menu"
         menu
       elsif input.to_i > 0
         input = input.to_i
         concert_info(input)
         select_another
+      elsif input == "exit"
+        break
       else
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
       end
-    end 
-  end
-
-  def list_concerts
-    puts ""
-    puts "The Best Concerts in NYC This Week:"
-    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-      puts "#{index + 1}. #{concert.title}, #{concert.date}"
     end
   end
 
@@ -108,7 +114,6 @@ class BestWeeklyNycConcerts::CLI
     end
   end
 
-  #not working
   def location_list
     puts ""
     puts "Below are the locations for all of this week's concerts:"
@@ -135,7 +140,29 @@ class BestWeeklyNycConcerts::CLI
     end
   end
 
+  def genre_list
+    puts ""
+    puts "Below are the different genres for all of this week's concerts:"
+    puts ""
+    genre_arr = BestWeeklyNycConcerts::Concert.all.collect {|concert| concert.genre}
+    @genre_list = genre_arr.uniq.each_with_index {|genre, index| puts "#{index + 1}. #{genre}"}
+  end
+
   def list_by_genre
-    puts "genre list"
+    puts ""
+    puts "Enter the number of the genre to see the concert(s) available:"
+    input = gets.strip.to_i
+    genre = ""
+    @genre_list.each_with_index do |gen, index|
+      if input - 1 == index
+        genre = gen
+      end
+    end
+
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      if concert.genre == genre
+        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+      end
+    end
   end
 end
