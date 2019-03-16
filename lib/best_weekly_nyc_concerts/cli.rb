@@ -117,6 +117,8 @@ class BestWeeklyNycConcerts::CLI
         more_info_and_select_another
       elsif input == "no"
         menu
+      elsif input == "exit"
+        menu 
       else
         puts "Sorry, that's not a valid entry. Please enter Yes/No."
       end
