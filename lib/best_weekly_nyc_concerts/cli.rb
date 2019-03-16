@@ -43,6 +43,7 @@ class BestWeeklyNycConcerts::CLI
       end
     end
     goodbye
+    exit
   end
 
   def goodbye
@@ -100,18 +101,20 @@ class BestWeeklyNycConcerts::CLI
   def select_another
     puts ""
     puts "Would you like to see another concert from the list? Yes/No"
-    input = gets.strip.downcase
+    input = ""
 
-    if input == "yes"
-      list_concerts
-      more_info
-    elsif input == "no"
-      menu
-    elsif input == "exit"
-      goodbye
-    else
-      puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
+    while input != "exit"
+      input = gets.strip.downcase
+      if input == "yes"
+        list_concerts
+        more_info
+      elsif input == "no"
+        menu
+      else
+        puts "Sorry, that's not a valid entry. Please enter Yes/No."
+      end
     end
+    exit
   end
 
   def location_list
