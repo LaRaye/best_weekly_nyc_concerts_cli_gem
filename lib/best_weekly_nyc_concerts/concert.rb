@@ -14,4 +14,20 @@ class BestWeeklyNycConcerts::Concert
   def self.all
     @@all
   end
+
+  def self.find_by_location_and_list(location)
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      if concert.location == location
+        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+      end
+    end
+  end
+
+  def self.find_by_genre_and_list(genre)
+    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+      if concert.genre == genre
+        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+      end
+    end
+  end
 end

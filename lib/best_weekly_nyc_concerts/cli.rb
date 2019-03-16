@@ -164,11 +164,7 @@ class BestWeeklyNycConcerts::CLI
         puts "Here is the concert(s) for that location:"
         puts ""
 
-        BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-          if concert.location == location
-            puts "#{index + 1}. #{concert.title}, #{concert.date}"
-          end
-        end
+        BestWeeklyNycConcerts::Concert.find_by_location_and_list(location)
         break
       elsif input == "exit"
         menu
@@ -206,11 +202,7 @@ class BestWeeklyNycConcerts::CLI
         puts "Here is the concert(s) for that genre:"
         puts ""
 
-        BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-          if concert.genre == genre
-            puts "#{index + 1}. #{concert.title}, #{concert.date}"
-          end
-        end
+        BestWeeklyNycConcerts::Concert.find_by_genre_and_list(genre)
         break
       elsif input == "exit"
         menu
