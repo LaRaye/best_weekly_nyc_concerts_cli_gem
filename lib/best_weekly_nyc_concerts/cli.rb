@@ -53,9 +53,7 @@ class BestWeeklyNycConcerts::CLI
   def list_concerts
     puts ""
     puts "The Best Concerts in NYC This Week:"
-    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-      puts "#{index + 1}. #{concert.title}, #{concert.date}"
-    end
+    BestWeeklyNycConcerts::Concert.list_concerts
   end
 
   def more_info_and_select_another
