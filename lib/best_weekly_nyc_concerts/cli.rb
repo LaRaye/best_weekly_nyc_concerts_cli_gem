@@ -147,18 +147,34 @@ class BestWeeklyNycConcerts::CLI
 
   def list_by_location
     puts ""
-    puts "Enter the number of the location to see the concert(s) playing there:"
-    input = gets.strip.to_i
-    location = ""
-    @location_list.each_with_index do |loc, index|
-      if input - 1 == index
-        location = loc
-      end
-    end
+    puts "Enter the number of the location to see the concert(s) available or 'exit' to return to menu:"
 
-    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-      if concert.location == location
-        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+    input = ""
+    location = ""
+
+    while input != "exit"
+      input = gets.strip.downcase
+      if input.to_i.between?(1, @location_list.length)
+        @location_list.each_with_index do |loc, index|
+          if input.to_i - 1 == index
+            location = loc
+          end
+        end
+
+        puts "Here is the concert(s) for that location:"
+        puts ""
+
+        BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+          if concert.location == location
+            puts "#{index + 1}. #{concert.title}, #{concert.date}"
+          end
+        end
+        break
+      elsif input == "exit"
+        menu
+      else
+        puts "Sorry, that is not a valid entry."
+        location_list
       end
     end
   end
@@ -173,20 +189,34 @@ class BestWeeklyNycConcerts::CLI
 
   def list_by_genre
     puts ""
-    puts "Enter the number of the genre to see the concert(s) available:"
+    puts "Enter the number of the genre to see the concert(s) available or 'exit' to return to menu:"
 
-    input = gets.strip
+    input = ""
     genre = ""
 
-    @genre_list.each_with_index do |gen, index|
-      if input.to_i - 1 == index
-        genre = gen
-      end
-    end
+    while input != "exit"
+      input = gets.strip.downcase
+      if input.to_i.between?(1, @genre_list.length)
+        @genre_list.each_with_index do |gen, index|
+          if input.to_i - 1 == index
+            genre = gen
+          end
+        end
 
-    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-      if concert.genre == genre
-        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+        puts "Here is the concert(s) for that genre:"
+        puts ""
+
+        BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
+          if concert.genre == genre
+            puts "#{index + 1}. #{concert.title}, #{concert.date}"
+          end
+        end
+        break
+      elsif input == "exit"
+        menu
+      else
+        puts "Sorry, that is not a valid entry. Choose a number or enter 'exit' to return to menu"
+        genre_list
       end
     end
   end
