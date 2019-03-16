@@ -36,6 +36,16 @@ class BestWeeklyNycConcerts::Concert
     end
   end
 
+  def self.location_list
+    location_arr = self.all.collect {|concert| concert.location}
+    location_list = location_arr.uniq.each_with_index {|location, index| puts "#{index + 1}. #{location}"}
+  end
+
+  def self.genre_list
+    genre_arr = self.all.collect {|concert| concert.genre}
+    genre_list = genre_arr.uniq.each_with_index {|genre, index| puts "#{index + 1}. #{genre}"}
+  end
+
   def self.find_by_location_and_list(location)
     self.all.each_with_index do |concert, index|
       if concert.location == location

@@ -118,7 +118,7 @@ class BestWeeklyNycConcerts::CLI
       elsif input == "no"
         menu
       elsif input == "exit"
-        menu 
+        menu
       else
         puts "Sorry, that's not a valid entry. Please enter Yes/No."
       end
@@ -130,8 +130,7 @@ class BestWeeklyNycConcerts::CLI
     puts ""
     puts "Below are the locations for all of this week's concerts:"
     puts ""
-    location_arr = BestWeeklyNycConcerts::Concert.all.collect {|concert| concert.location}
-    @location_list = location_arr.uniq.each_with_index {|location, index| puts "#{index + 1}. #{location}"}
+    @location_list = BestWeeklyNycConcerts::Concert.location_list
   end
 
   def list_by_location
@@ -168,8 +167,7 @@ class BestWeeklyNycConcerts::CLI
     puts ""
     puts "Below are the different genres for all of this week's concerts:"
     puts ""
-    genre_arr = BestWeeklyNycConcerts::Concert.all.collect {|concert| concert.genre}
-    @genre_list = genre_arr.uniq.each_with_index {|genre, index| puts "#{index + 1}. #{genre}"}
+    @genre_list = BestWeeklyNycConcerts::Concert.genre_list
   end
 
   def list_by_genre
