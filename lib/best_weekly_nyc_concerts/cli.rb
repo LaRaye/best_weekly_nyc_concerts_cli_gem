@@ -5,7 +5,6 @@ class BestWeeklyNycConcerts::CLI
     puts ""
     puts "Welcome to the roundup of the best concerts in NYC this week!"
     menu
-    #goodbye
   end
 
   def menu
@@ -26,7 +25,7 @@ class BestWeeklyNycConcerts::CLI
       case input
       when "1"
         list_concerts
-        more_info
+        more_info_and_select_another
         goodbye
       when "2"
         location_list
@@ -59,11 +58,9 @@ class BestWeeklyNycConcerts::CLI
     end
   end
 
-  #work on this loop
-  def more_info
+  def more_info_and_select_another
     puts ""
     puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
-
     input = nil
 
     while input != "exit"
@@ -80,6 +77,31 @@ class BestWeeklyNycConcerts::CLI
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
       end
     end
+    goodbye
+    exit
+  end
+
+  def more_info
+    puts ""
+    puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
+    input = nil
+
+    while input != "exit"
+      input = gets.strip.downcase
+      if input == "menu"
+        menu
+      elsif input.to_i > 0
+        input = input.to_i
+        concert_info(input)
+        menu
+      elsif input == "exit"
+        break
+      else
+        puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
+      end
+    end
+    goodbye
+    exit
   end
 
   def concert_info(input)
@@ -107,7 +129,7 @@ class BestWeeklyNycConcerts::CLI
       input = gets.strip.downcase
       if input == "yes"
         list_concerts
-        more_info
+        more_info_and_select_another
       elsif input == "no"
         menu
       else
