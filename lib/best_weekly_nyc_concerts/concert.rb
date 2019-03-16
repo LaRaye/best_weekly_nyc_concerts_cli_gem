@@ -21,6 +21,21 @@ class BestWeeklyNycConcerts::Concert
     end
   end
 
+  def self.concert_info(input)
+    self.all.each_with_index do |concert, index|
+      if input - 1 == index
+        puts ""
+        puts "#{index + 1}. #{concert.title}, #{concert.date}"
+        puts ""
+        puts "Playing At: #{concert.location}"
+        puts ""
+        puts "Genre: #{concert.genre}"
+        puts ""
+        puts "About: #{concert.blurb}"
+      end
+    end
+  end
+
   def self.find_by_location_and_list(location)
     self.all.each_with_index do |concert, index|
       if concert.location == location

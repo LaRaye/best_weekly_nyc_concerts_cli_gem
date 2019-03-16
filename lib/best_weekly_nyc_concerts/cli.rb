@@ -102,18 +102,7 @@ class BestWeeklyNycConcerts::CLI
 
   def concert_info(input)
     input = input.to_i
-    BestWeeklyNycConcerts::Concert.all.each_with_index do |concert, index|
-      if input - 1 == index
-        puts ""
-        puts "#{index + 1}. #{concert.title}, #{concert.date}"
-        puts ""
-        puts "Playing At: #{concert.location}"
-        puts ""
-        puts "Genre: #{concert.genre}"
-        puts ""
-        puts "About: #{concert.blurb}"
-      end
-    end
+    BestWeeklyNycConcerts::Concert.concert_info(input)
   end
 
   def select_another
