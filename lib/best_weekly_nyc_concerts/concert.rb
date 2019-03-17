@@ -51,10 +51,11 @@ class BestWeeklyNycConcerts::Concert
     @location_selection_concerts = []
     self.all.each do |concert, index|
       if concert.location == location
-        @location_selection_concerts << concert.title
+        @location_selection_concerts << concert
         puts "#{counter += 1}. #{concert.title}, #{concert.date}"
       end
     end
+    @location_selection_concerts
   end
 
   def self.find_by_genre_and_list(genre)
@@ -62,18 +63,19 @@ class BestWeeklyNycConcerts::Concert
     @genre_selection_concerts = []
     self.all.each do |concert, index|
       if concert.genre == genre
-        @genre_selection_concerts << concert.title
+        @genre_selection_concerts << concert
         puts "#{counter += 1}. #{concert.title}, #{concert.date}"
       end
     end
+    @genre_selection_concerts
   end
 
   def self.find_and_list_from_location(input)
     title = ""
 
-    @location_selection_concerts.each_with_index do |concert_title, index|
+    @location_selection_concerts.each_with_index do |concert, index|
       if input.to_i - 1 == index
-        title = concert_title
+        title = concert.title
       end
     end
 
@@ -93,9 +95,9 @@ class BestWeeklyNycConcerts::Concert
   def self.find_and_list_from_genre(input)
     title = ""
 
-    @genre_selection_concerts.each_with_index do |concert_title, index|
+    @genre_selection_concerts.each_with_index do |concert, index|
       if input.to_i - 1 == index
-        title = concert_title
+        title = concert.title
       end
     end
 

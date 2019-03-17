@@ -88,7 +88,7 @@ class BestWeeklyNycConcerts::CLI
       input = gets.strip.downcase
       if input == "menu"
         menu
-      elsif input.to_i > 0
+      elsif input.to_i.between?(1, @location_selection_concerts.length)#input.to_i > 0
         BestWeeklyNycConcerts::Concert.find_and_list_from_location(input)
         menu
       elsif input == "exit"
@@ -110,8 +110,7 @@ class BestWeeklyNycConcerts::CLI
       input = gets.strip.downcase
       if input == "menu"
         menu
-      elsif input.to_i > 0
-        #concert_info(input)
+      elsif input.to_i.between?(1, @genre_selection_concerts.length)
         BestWeeklyNycConcerts::Concert.find_and_list_from_genre(input)
         menu
       elsif input == "exit"
@@ -179,8 +178,7 @@ class BestWeeklyNycConcerts::CLI
 
         puts "Here is the concert(s) for #{location}:"
         puts ""
-
-        BestWeeklyNycConcerts::Concert.find_by_location_and_list(location)
+        @location_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_location_and_list(location)
         break
       elsif input == "exit"
         menu
@@ -216,8 +214,7 @@ class BestWeeklyNycConcerts::CLI
 
         puts "Here is the concert(s) for #{genre}:"
         puts ""
-
-        BestWeeklyNycConcerts::Concert.find_by_genre_and_list(genre)
+        @genre_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_genre_and_list(genre)
         break
       elsif input == "exit"
         menu
