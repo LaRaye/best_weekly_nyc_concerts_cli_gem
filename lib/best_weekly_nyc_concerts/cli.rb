@@ -162,20 +162,15 @@ class BestWeeklyNycConcerts::CLI
     puts "Enter the number of the location to see the concert(s) available or 'exit' to return to menu:"
 
     input = ""
-    location = ""
+    @location = ""
 
     while input != "exit"
       input = gets.strip.downcase
       if input.to_i.between?(1, @location_list.length)
-        @location_list.each_with_index do |loc, index|
-          if input.to_i - 1 == index
-            location = loc
-          end
-        end
-
-        puts "Here is the concert(s) for #{location}:"
+        grab_location_from_input(input)
+        puts "Here is the concert(s) for #{@location}:"
         puts ""
-        @location_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_location_and_list(location)
+        @location_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_location_and_list(@location)
         break
       elsif input == "exit"
         menu
@@ -198,20 +193,15 @@ class BestWeeklyNycConcerts::CLI
     puts "Enter the number of the genre to see the concert(s) available or 'exit' to return to menu:"
 
     input = ""
-    genre = ""
+    @genre = ""
 
     while input != "exit"
       input = gets.strip.downcase
       if input.to_i.between?(1, @genre_list.length)
-        @genre_list.each_with_index do |gen, index|
-          if input.to_i - 1 == index
-            genre = gen
-          end
-        end
-
-        puts "Here is the concert(s) for #{genre}:"
+        grab_genre_from_input(input)
+        puts "Here is the concert(s) for #{@genre}:"
         puts ""
-        @genre_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_genre_and_list(genre)
+        @genre_selection_concerts = BestWeeklyNycConcerts::Concert.find_by_genre_and_list(@genre)
         break
       elsif input == "exit"
         menu
@@ -221,4 +211,23 @@ class BestWeeklyNycConcerts::CLI
       end
     end
   end
+
+  def grab_location_from_input(input)
+    @location_list.each_with_index do |loc, index|
+      if input.to_i - 1 == index
+        @location = loc
+      end
+    end
+    @location
+  end
+
+  def grab_genre_from_input(input)
+    @genre_list.each_with_index do |gen, index|
+      if input.to_i - 1 == index
+        @genre = gen
+      end
+    end
+    @genre
+  end
+
 end
