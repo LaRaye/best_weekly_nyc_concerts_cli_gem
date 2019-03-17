@@ -65,12 +65,13 @@ class BestWeeklyNycConcerts::CLI
       input = gets.strip.downcase
       if input == "menu"
         menu
-      elsif input.to_i > 0
+      elsif input.to_i.between?(1, self.list_concerts.length)  #input.to_i > 0
         concert_info(input)
         select_another
       elsif input == "exit"
         break
       else
+        puts ""
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
       end
     end

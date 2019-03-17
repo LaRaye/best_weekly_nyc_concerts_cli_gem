@@ -11,7 +11,7 @@ class BestWeeklyNycConcerts::Concert_Scraper
   def create_concerts
     self.get_concerts.each do |concert_listing|
       concert = BestWeeklyNycConcerts::Concert.new
-      concert.title = concert_listing.css("h3").text.strip
+      concert.title = concert_listing.css("h3.card-title").text.strip
       concert.location = concert_listing.css("span.bold").text.strip
       concert.date = concert_listing.css("time.bold").text.strip
       concert.genre = concert_listing.css(".category").text.strip
