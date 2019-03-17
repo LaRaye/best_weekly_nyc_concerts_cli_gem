@@ -23,10 +23,11 @@ class BestWeeklyNycConcerts::CLI
     while input != "exit"
       input = gets.strip.downcase
       case input
+      when "exit"
+        break
       when "1"
         list_concerts
         more_info_and_select_another
-        goodbye
       when "2"
         location_list
         list_by_location
@@ -35,8 +36,6 @@ class BestWeeklyNycConcerts::CLI
         genre_list
         list_by_genre
         more_info_by_genre
-      when "exit"
-        break
       else
         puts "Sorry, that's not a valid entry. Choose a number from above or enter 'exit'."
       end
@@ -63,13 +62,13 @@ class BestWeeklyNycConcerts::CLI
 
     while input != "exit"
       input = gets.strip.downcase
-      if input == "menu"
+      if input == "exit"
+        break
+      elsif input == "menu"
         menu
-      elsif input.to_i.between?(1, self.list_concerts.length)  #input.to_i > 0
+      elsif input.to_i.between?(1, self.list_concerts.length)
         concert_info(input)
         select_another
-      elsif input == "exit"
-        break
       else
         puts ""
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
@@ -86,13 +85,13 @@ class BestWeeklyNycConcerts::CLI
 
     while input != "exit"
       input = gets.strip.downcase
-      if input == "menu"
+      if input == "exit"
+        break
+      elsif input == "menu"
         menu
       elsif input.to_i.between?(1, @location_selection_concerts.length)#input.to_i > 0
         BestWeeklyNycConcerts::Concert.find_and_list_from_location(input)
         menu
-      elsif input == "exit"
-        break
       else
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
       end
@@ -108,13 +107,13 @@ class BestWeeklyNycConcerts::CLI
 
     while input != "exit"
       input = gets.strip.downcase
-      if input == "menu"
+      if input == "exit"
+        break
+      elsif input == "menu"
         menu
       elsif input.to_i.between?(1, @genre_selection_concerts.length)
         BestWeeklyNycConcerts::Concert.find_and_list_from_genre(input)
         menu
-      elsif input == "exit"
-        break
       else
         puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
       end
@@ -142,9 +141,7 @@ class BestWeeklyNycConcerts::CLI
       if input == "yes"
         list_concerts
         more_info_and_select_another
-      elsif input == "no"
-        menu
-      elsif input == "exit"
+      elsif input == "no" || input == "exit"
         menu
       else
         puts "Sorry, that's not a valid entry. Please enter Yes/No."
@@ -224,5 +221,4 @@ class BestWeeklyNycConcerts::CLI
       end
     end
   end
-
 end
