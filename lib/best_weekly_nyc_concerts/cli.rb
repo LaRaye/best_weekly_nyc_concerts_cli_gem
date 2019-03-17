@@ -30,7 +30,7 @@ class BestWeeklyNycConcerts::CLI
       when "2"
         location_list
         list_by_location
-        more_info
+        more_info_by_location
       when "3"
         genre_list
         list_by_genre
@@ -79,7 +79,7 @@ class BestWeeklyNycConcerts::CLI
     exit
   end
 
-  def more_info
+  def more_info_by_location
     puts ""
     puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
     input = nil
@@ -88,8 +88,8 @@ class BestWeeklyNycConcerts::CLI
       input = gets.strip.downcase
       if input == "menu"
         menu
-      elsif input.to_i > 0
-        concert_info(input)
+      elsif input.to_i > 0 #checking not a string
+        BestWeeklyNycConcerts::Concert.find_and_list(input)
         menu
       elsif input == "exit"
         break
@@ -101,9 +101,35 @@ class BestWeeklyNycConcerts::CLI
     exit
   end
 
+  # def more_info
+  #   puts ""
+  #   puts "Choose a number to learn more. Enter 'menu' to return to the menu or 'exit':"
+  #   input = nil
+  #
+  #   while input != "exit"
+  #     input = gets.strip.downcase
+  #     if input == "menu"
+  #       menu
+  #     elsif input.to_i > 0 #checking not a string
+  #       concert_info(input)
+  #       menu
+  #     elsif input == "exit"
+  #       break
+  #     else
+  #       puts "Sorry, that's not a valid entry. Choose a number from above, enter 'menu' or enter 'exit'."
+  #     end
+  #   end
+  #   goodbye
+  #   exit
+  # end
+
   def concert_info(input)
     input = input.to_i
     BestWeeklyNycConcerts::Concert.concert_info(input)
+  end
+
+  def concert_info_by_title(title)
+    BestWeeklyNycConcerts::Concert.find_by_title_and_list(title)
   end
 
   def select_another
